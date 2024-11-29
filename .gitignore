@@ -1,0 +1,11 @@
+# Ignore IDE settings
+.idea/
+*.iml
+
+# Ignore build artifacts
+/backend/target/
+/frontend/build/
+
+# Ignore node_modules
+/frontend/node_modules/
+
