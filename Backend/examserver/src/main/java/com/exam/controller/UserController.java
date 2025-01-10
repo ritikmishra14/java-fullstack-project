@@ -18,9 +18,10 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
     // creating user
     @PostMapping("/")
-    public ResponseEntity<User> createUser(@RequestBody User user) throws  Exception{
+    public ResponseEntity<User> createUser(@RequestBody User user) throws Exception {
 
         // Create Role
 
@@ -38,16 +39,14 @@ public class UserController {
         normalAndAdmin.setRoleName("NORMAL AND ADMIN");
 
 
-
         // create UserRole to add to set
         UserRole userRole = new UserRole();
         userRole.setUser(user);
-        if(user.getUsername().startsWith("r")){
+        if (user.getUsername().startsWith("r")) {
             userRole.setRole(adminRole);
-        } else if (user.getUsername().length()>4) {
+        } else if (user.getUsername().length() > 4) {
             userRole.setRole(normalRole);
-        }
-        else{
+        } else {
             userRole.setRole(normalAndAdmin);
         }
 
@@ -56,36 +55,35 @@ public class UserController {
         roles.add(userRole);
 
         User createdUser = this.userService.createUser(user, roles);
-        if(createdUser == null){
+        if (createdUser == null) {
             return ResponseEntity.badRequest().build();
-        }
-        else{
+        } else {
             return ResponseEntity.of(Optional.of(createdUser));
         }
     }
 
     // Getting the user
     @GetMapping("/{username}")
-    public ResponseEntity<User> getUserByName(@PathVariable("username") String username){
+    public ResponseEntity<User> getUserByName(@PathVariable("username") String username) {
         User user = this.userService.getUserByName(username);
-        if(user == null){
+        if (user == null) {
             throw new RuntimeException("User not found");
         }
         return ResponseEntity.ok(user);
     }
 
     @PutMapping("/{userId}")
-    public ResponseEntity<User> updateUser(@RequestBody  User user ,@PathVariable Long userId){
-User updatedUser = this.userService.updateUser(user, userId);
-if(updatedUser == null){
-    throw new RuntimeException("User not present");
-}
-return ResponseEntity.ok(updatedUser);
+    public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable Long userId) {
+        User updatedUser = this.userService.updateUser(user, userId);
+        if (updatedUser == null) {
+            throw new RuntimeException("User not present");
+        }
+        return ResponseEntity.ok(updatedUser);
     }
 
     // delete user
     @DeleteMapping("/{userId}")
-    public void deleteUser(@PathVariable("userId") Long userId){
+    public void deleteUser(@PathVariable("userId") Long userId) {
         this.userService.deleteUser(userId);
     }
 }
