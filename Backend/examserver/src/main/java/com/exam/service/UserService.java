@@ -47,11 +47,13 @@ public class UserService {
     // update user
     public User updateUser(User user , Long userId){
         User previousUser = this.userReposiroty.findById(userId).get();
-        previousUser.setUsername(user.getUsername());
+        System.out.println(previousUser);
+        previousUser.setFirstName(user.getFirstName());
         previousUser.setUsername(user.getUsername());
         previousUser.setPhone(user.getPhone());
         previousUser.setEmail(user.getEmail());
         previousUser.setPassword(user.getPassword());
+        this.userReposiroty.save(previousUser);
         return  previousUser;
     }
 

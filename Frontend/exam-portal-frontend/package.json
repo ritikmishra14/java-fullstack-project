@@ -27,6 +27,7 @@
     "exam-portal-frontend": "file:",
     "express": "^4.18.2",
     "rxjs": "~7.8.0",
+    "sweetalert": "^2.1.2",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
   },

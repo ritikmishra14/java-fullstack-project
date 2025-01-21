@@ -14,6 +14,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin("*")
 public class UserController {
 
     @Autowired
@@ -23,6 +24,8 @@ public class UserController {
     @PostMapping("/")
     public ResponseEntity<User> createUser(@RequestBody User user) throws Exception {
 
+        user.setProfile("default.png");
+        user.setEnabled(true);
         // Create Role
 
         //NORMAL ROLE

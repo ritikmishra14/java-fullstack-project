@@ -1,5 +1,5 @@
 .logo-img{
-  width: 60px;
+  width: 70px;
 }
 
 .full-width{
@@ -8,4 +8,11 @@
 
 .clear-button{
   margin-left: 20px;
+}
+
+.register{
+  background-color: antiquewhite;
+  font-weight: bolder;
+  color: black;
+  text-align: center;
 }
