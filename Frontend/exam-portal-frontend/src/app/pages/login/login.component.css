@@ -1,0 +1,15 @@
+.logo-img{
+  width: 90px;
+}
+.login{
+ background-color: antiquewhite;
+ color: black;
+ font-weight: bolder;
+}
+.full-width{
+  width: 100%;
+}
+
+.reset-button{
+  margin-left: 20px;
+}
