@@ -1,0 +1,14 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+.myapp{
+  width: 50px;
+  color:black;
+  margin-left: 10px;
+}
+.navbar{
+  margin-top: 0px;
+  margin-bottom: 0px;
+  height: 58px;
+  color: rgba(244, 67, 54, 0.87);
+}

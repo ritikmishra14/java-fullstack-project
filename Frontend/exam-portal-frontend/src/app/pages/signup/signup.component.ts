@@ -4,21 +4,24 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import swal from 'sweetalert';
+import { NavbarComponent } from "../../components/navbar/navbar.component";
 import { UserService } from '../../services/user.service';
 @Component({
   selector: 'app-signup',
   standalone: true,
   imports: [
     CommonModule,
-        MatButtonModule,        
-        MatFormFieldModule,
-        MatInputModule,
-        FormsModule,
-       
-  ],
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    NavbarComponent,
+    MatIconModule,
+],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
