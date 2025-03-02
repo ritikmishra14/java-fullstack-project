@@ -7,6 +7,7 @@ import com.exam.repository.UserReposiroty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -60,5 +61,10 @@ public class UserService {
     // delete user
     public void deleteUser(Long userId){
         this.userReposiroty.deleteById(userId);
+    }
+
+    public List<User> getAllUsers() {
+        List<User> users = this.userReposiroty.findAll();
+        return users;
     }
 }

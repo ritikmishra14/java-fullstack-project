@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -64,6 +65,17 @@ public class UserController {
             return ResponseEntity.of(Optional.of(createdUser));
         }
     }
+
+    // Get All Users
+    @GetMapping("/")
+    public ResponseEntity<List<User>> getAllUsers(){
+        List<User> users = this.userService.getAllUsers();
+        if(users.size() < 0){
+            throw new RuntimeException("user not found");
+        }
+        return ResponseEntity.of(Optional.of(users));
+    }
+
 
     // Getting the user
     @GetMapping("/{username}")
