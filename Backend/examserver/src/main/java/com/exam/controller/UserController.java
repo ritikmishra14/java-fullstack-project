@@ -9,11 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin("*")
 public class UserController {
 
     @Autowired
@@ -23,6 +25,8 @@ public class UserController {
     @PostMapping("/")
     public ResponseEntity<User> createUser(@RequestBody User user) throws Exception {
 
+        user.setProfile("default.png");
+        user.setEnabled(true);
         // Create Role
 
         //NORMAL ROLE
@@ -61,6 +65,17 @@ public class UserController {
             return ResponseEntity.of(Optional.of(createdUser));
         }
     }
+
+    // Get All Users
+    @GetMapping("/")
+    public ResponseEntity<List<User>> getAllUsers(){
+        List<User> users = this.userService.getAllUsers();
+        if(users.size() < 0){
+            throw new RuntimeException("user not found");
+        }
+        return ResponseEntity.of(Optional.of(users));
+    }
+
 
     // Getting the user
     @GetMapping("/{username}")

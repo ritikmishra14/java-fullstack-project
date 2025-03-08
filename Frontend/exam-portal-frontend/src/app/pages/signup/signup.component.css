@@ -1,0 +1,18 @@
+.logo-img{
+  width: 70px;
+}
+
+.full-width{
+  width: 100%;
+}
+
+.clear-button{
+  margin-left: 20px;
+}
+
+.register{
+  background-color: antiquewhite;
+  font-weight: bolder;
+  color: black;
+  text-align: center;
+}
