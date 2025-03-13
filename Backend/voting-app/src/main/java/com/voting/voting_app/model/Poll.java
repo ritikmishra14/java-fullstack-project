@@ -1,7 +1,5 @@
 package com.voting.voting_app.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -11,6 +9,7 @@ import java.util.List;
 public class Poll {
 
     @Id
+    @Column(name = "poll_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String question;

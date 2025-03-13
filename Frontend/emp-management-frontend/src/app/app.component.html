@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand content-white" 
+    [routerLink]="['']" routerLinkActive="true"
+    >
+      <span class="content-white">Home</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active content-white" 
+        [routerLink]="['employees']" routerLinkActive="true" 
+        aria-current="page">
+        <span class="content-white">Employees</span>
+      </a>
+        <a class="nav-link active content-white"
+        [routerLink]="['create-employee']" routerLinkActive="true" 
+         >
+          <span class="content-white">Create Employee</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="container d-grid gap-3">
+  <!-- <app-employee-list></app-employee-list> -->
+   <router-outlet></router-outlet>
+</div>
+<footer class="footer">
+<div class="container">
+  <span class="copyright">All rights reserved &#169;2025 ritik mishra</span>
+</div>
+</footer>

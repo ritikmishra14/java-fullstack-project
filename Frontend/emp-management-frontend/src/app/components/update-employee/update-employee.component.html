@@ -1,0 +1,66 @@
+<div class="col-md-5 offset-md-3 container">
+  <h4>Update Employee</h4>
+  <form class="needs-validation" novalidate 
+(ngSubmit)="onSubmit()">
+  <div class="form-row">
+
+    <div class="form-group mb-2">
+      <label>Employee Id</label>
+      <input 
+      [(ngModel)]="employee.employeeId"
+      name="employeeId"
+      type="text" 
+      class="form-control" 
+      id="firstName" 
+      placeholder="First name" 
+      value="employee.employeeId"
+      >
+    </div>
+
+    <div class="form-group mb-2">
+      <label>First name</label>
+      <input 
+      [(ngModel)]="employee.firstName"
+      name="firstName"
+      type="text" 
+      class="form-control" 
+      id="firstName" 
+      placeholder="First name"
+      
+      >
+    </div>
+
+    <div class="form-group mb-2">
+      <label>Last name</label>
+      <input 
+      [(ngModel)]="employee.lastName"
+      name="lastName"
+      type="text" 
+      class="form-control" 
+      id="lastName" 
+      placeholder="Last name"
+      
+      >
+    </div>
+
+    <div class="form-group mb-2">
+      <label>email</label>
+      <input 
+      [(ngModel)]="employee.email"
+      name="email"
+      type="text" 
+      class="form-control" 
+      id="email" 
+      placeholder="email"
+      
+      >
+    </div>
+
+  </div>   
+  <button 
+  class="btn btn-success" 
+  type="submit">Submit form</button>
+</form>
+</div>
+
+
