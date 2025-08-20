@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ServerRepository  extends JpaRepository<Server , Long> {
 
-    public Server findByIpAddress();
+    public Server findByIpAddress(String ipAddress);
 
 }
