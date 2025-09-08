@@ -2,10 +2,12 @@ package com.manage.server.service.implementation;
 
 import com.manage.server.enumerations.Status;
 import com.manage.server.model.Server;
+import com.manage.server.model.ServerDto;
 import com.manage.server.repository.ServerRepository;
 import com.manage.server.service.ServerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Random;
 
 @RequiredArgsConstructor
@@ -24,11 +28,31 @@ import java.util.Random;
 public class ServerServiceImpl implements ServerService {
 
     private final ServerRepository serverRepository;
+
+    private final ModelMapper modelMapper;
+
+    // convert a DTO object to Entity
+    private Server convertToEntity(ServerDto serverDto) {
+        Server server = modelMapper.map(serverDto , Server.class);
+        return server;
+    }
+
+    // convert an Entity to DTO
+    private ServerDto convertToServerDTo(Server server) {
+        ServerDto serverDto = this.modelMapper.map(server , ServerDto.class);
+        return serverDto;
+    }
+
+
     @Override
-    public Server create(Server server) {
-        log.info("Server name is: {}" , server.getName());
-        server.setImageUrl(setServerImageUrl());
-        return serverRepository.save(server);
+    public ServerDto create(ServerDto serverDto) {
+        log.info("Server name is: {}" , serverDto.getName());
+
+        serverDto.setImageUrl(setServerImageUrl());
+       Server server = convertToEntity(serverDto);
+      Server createdServer = this.serverRepository.save(server);
+     return convertToServerDTo(createdServer);
+
     }
 
 
@@ -46,22 +70,45 @@ public class ServerServiceImpl implements ServerService {
 
 
     @Override
-    public Collection<Server> list(int limit) {
+    public Collection<ServerDto> getAllServers(int limit) {
         log.info("fetching all Servers");
+        List<Server> listOfServer = this.serverRepository.findAll(
+                PageRequest.of(0 , limit)).toList();
+       List<ServerDto> listOfServerDtos = new ArrayList<>();
+               listOfServer.forEach(
+                server -> {
+                    listOfServerDtos.add(convertToServerDTo(server));
+                }
+        );
 
-        return this.serverRepository
-                .findAll(PageRequest.of(0 , limit)).toList();
+        return listOfServerDtos;
+
     }
 
     @Override
-    public Server get(Long id) {
-        log.info("fetching server by id: {}" , id);
-        return this.serverRepository.findById(id).get();
+    public ServerDto get(Long id) {
+        log.info("fetching server dto by id: {}" , id);
+        Server server = this.serverRepository.findById(id).get();
+        ServerDto servertDto = convertToServerDTo(server);
+        return servertDto;
     }
 
     @Override
-    public Server Update(Server server) {
-        return null;
+    public ServerDto Update(ServerDto serverDto , Long id)
+    {
+      Server updatedUser = this.serverRepository.findById(id)
+              .map(
+                      server -> {
+                          server.setId(id);
+                          server.setName(serverDto.getName());
+                          server.setMemory(serverDto.getMemory());
+                          server.setIpAddress(serverDto.getIpAddress());
+                          server.setStatus(serverDto.getStatus());
+                          server.setImageUrl(serverDto.getImageUrl());
+                          return server;
+                      }
+              ).get();
+     return convertToServerDTo(updatedUser);
     }
 
     @Override
